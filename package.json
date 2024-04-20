@@ -1,0 +1,30 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.3",
+    "@types/node-fetch": "^2.6.11",
+    "abort-controller": "^3.0.0",
+    "date-fns": "^3.6.0",
+    "gray-matter": "^4.0.3",
+    "next": "^14.2.2",
+    "next-redux-wrapper": "^8.1.0",
+    "node-fetch": "^3.3.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^9.1.1",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.2.79",
+    "typescript": "^5.4.5"
+  }
+}
