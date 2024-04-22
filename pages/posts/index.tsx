@@ -1,9 +1,10 @@
 import Head from 'next/head';
-// import { Inter } from 'next/font/google';
 import Link from 'next/link';
-import styles from '../../styles/Main.module.css';
+import { Suspense } from 'react';
 
-// const inter = Inter({ subsets: ['latin'] });
+
+import styles from '../../styles/Main.module.css';
+import Loading from '../../components/Loading';
 
 const posts = [
   {
@@ -24,6 +25,42 @@ const posts = [
     title: 'About rabbits',
     text: 'Khhjnk mBHkml, kJJkll;vdv',
   },
+  {
+    id: 4,
+    author: 'Nick',
+    title: 'About cats',
+    text: 'HAkkjkhbbxxx khjh nk kkkl l',
+  },
+  {
+    id: 5,
+    author: 'Kate',
+    title: 'About dogs',
+    text: 'Knfgfjghbbxxx khjh nk kkkl l',
+  },
+  {
+    id: 6,
+    author: 'Alina',
+    title: 'About rabbits',
+    text: 'Khhjnk mBHkml, kJJkll;vdv',
+  },
+  {
+    id: 7,
+    author: 'Nick',
+    title: 'About cats',
+    text: 'HAkkjkhbbxxx khjh nk kkkl l',
+  },
+  {
+    id: 8,
+    author: 'Kate',
+    title: 'About dogs',
+    text: 'Knfgfjghbbxxx khjh nk kkkl l',
+  },
+  {
+    id: 9,
+    author: 'Alina',
+    title: 'About rabbits',
+    text: 'Khhjnk mBHkml, kJJkll;vdv',
+  },
 ];
 
 export default function Home() {
@@ -35,24 +72,27 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <main className={`${styles.main} ${inter.className}`}> */}
       <main className={`${styles.main}`}>
         <h1>The Blog !</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              <Link
-                href={{
-                  // pathname: `/posts/${encodeURIComponent(post.id)}`,
-                  pathname: `/posts/${post.id}`,
-                  query: { id: post.id },
-                }}
-              >
-                {post.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+
+        <Suspense fallback={<Loading/>}>
+          <ul>
+            {posts.map((post) => (
+              <li key={post.id}>
+                <Link
+                  href={{
+                    // pathname: `/posts/${encodeURIComponent(post.id)}`,
+                    pathname: `/posts/${post.id}`,
+                    query: { id: post.id },
+                  }}
+                >
+                  {post.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Suspense>
+
         <Link href="/">
           <button style={{ padding: '10px' }}>Go to The Main</button>
         </Link>

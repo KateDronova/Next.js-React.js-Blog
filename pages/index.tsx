@@ -1,16 +1,29 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
-import RootLayout from './layout';
-// import { Inter } from 'next/font/google';
-import styles from '../styles/Main.module.css';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useCallback, useMemo, useState } from 'react';
 
-const ThemeContext = createContext('light');
+import RootLayout from './layout';
+import styles from '../styles/Main.module.css';
+import Announcement from '../components/Announcement';
+
+export const ThemeContext = createContext('light');
 // const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const [theme, setTheme] = useState('light');
+  const [userLocation, setUserLocation] = useState('Georgia');
+  const prices = [1, 2, 3, 4, 5, 6];
+
+  const handleOnClick = useCallback(() => {
+    console.log(`Special offer for ${userLocation}`);
+  }, [userLocation]);
+
+  
+  function countBestPrice(prices: number[]): number {
+    return Math.min(...prices);
+  }
+  const bestPrice = useMemo(() => countBestPrice(prices), [prices]);
+
 
   return (
     <>
@@ -22,10 +35,9 @@ export default function Home() {
       </Head>
       <ThemeContext.Provider value={theme}>
         <RootLayout>
-          {/* <main className={`${inter.className} ${styles.main}`}> */}
           <main className={styles.main}>
             <h1>Main page</h1>
-            <Announcement />
+            <Announcement bestPrice={bestPrice} onClick={handleOnClick} />
             <label>
               <input
                 type="checkbox"
@@ -43,26 +55,5 @@ export default function Home() {
         </RootLayout>
       </ThemeContext.Provider>
     </>
-  );
-}
-function Announcement() {
-  const theme = useContext(ThemeContext);
-  const className = 'container-' + theme;
-
-  return (
-    <article className={`${styles.container} ${styles[className]}`}>
-      <Image
-        src="/pet_game_general.png"
-        alt="Bjanka greets you at this site."
-        width={290}
-        height={400}
-      ></Image>
-      <div className={styles.content}>
-        <h2>Announcement</h2>
-        <p>Here is our greatest news!</p>
-        <p>Now we're offering tiny chikens.</p>
-        <p>We're offering fluffy cats, too!</p>
-      </div>
-    </article>
   );
 }

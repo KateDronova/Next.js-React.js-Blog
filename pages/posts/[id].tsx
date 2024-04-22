@@ -10,7 +10,6 @@ export default function Post() {
 
   return (
     <>
-      {/* <main className={`${styles.main} ${inter.className}`}> */}
       <main className={`${styles.main}`}>
         <h1>Post {router.query.id}</h1>
         <Link href="/">
